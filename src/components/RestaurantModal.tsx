@@ -3,7 +3,7 @@ import RestForm from "./RestForm";
 import { IoClose } from "react-icons/io5";
 import { ModalState } from "../types";
 
-const RestaurantModal = ({ modalIsOpen, closeModal, dataRestaurant, setDataRestaurant }: ModalState) => {
+const RestaurantModal = ({ modalIsOpen, ...rest }: ModalState) => {
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -17,16 +17,14 @@ const RestaurantModal = ({ modalIsOpen, closeModal, dataRestaurant, setDataResta
         <button
           type="button"
           className="py-1 rounded bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 text-white transition duration-200 cursor-pointer p-2"
-          onClick={closeModal}
+          onClick={rest.closeModal}
         >
           <IoClose size={22} />
         </button>
       </div>
 
       <RestForm
-        closeModal={closeModal}
-        dataRestaurant={dataRestaurant}
-        setDataRestaurant={setDataRestaurant}
+        {...rest}
       />
     </Modal>
   )
