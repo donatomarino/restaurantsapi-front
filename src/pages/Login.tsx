@@ -89,6 +89,7 @@ const Login = () => {
             id="password"
             placeholder="wewelcome2025"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
+            autoComplete="current-password"
             required
           />
         </div>

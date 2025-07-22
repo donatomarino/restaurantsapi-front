@@ -5,7 +5,7 @@ import instanceAxios from '../api/APIUtils';
 import { useState } from "react";
 import { Restaurant, RestaurantCellParams } from "../types";
 import { EditButtons } from "./EditButtons";
-import FullPageLoader from "../PageLoader";
+import FullPageLoader from "./PageLoader";
 import useLoad from "../hooks/useLoad";
 import { ReloadContext } from "../contexto/ReloadContext";
 
