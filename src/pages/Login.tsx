@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { LoginPayload, AuthResponse } from "../types";
+import { LoginPayload, BaseApiResponse, AuthResponse } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 interface Data {
-  inputValues: LoginPayload,
-  payload: AuthResponse
+  credentials: LoginPayload,
+  successResponse?: AuthResponse,
+  errorResponse?: BaseApiResponse;
 }
 
 const Login = () => {
-  const [formData, setFormData] = useState<Data['inputValues']>({
+  const [formData, setFormData] = useState<Data['credentials']>({
     email: '',
     password: ''
   });
@@ -26,16 +27,16 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const response: Data['payload'] = await instanceAxios.postRequest({
+      const res: Data['successResponse'] | Data['errorResponse']  = await instanceAxios.postRequest({
         url: "http://localhost/restaurantsapi-back/public/api/auth",
         data: formData
       });
 
-      if (response.success) {
-        localStorage.setItem('token', response.access_token);
+      if (res.success && 'access_token' in res) {
+        localStorage.setItem('token', res.access_token);
         navigate('/home');
       } else {
-        console.log(response);
+        console.log(res);
         toast.error('Insertar las credenciales indicadas en el placeholder');
       }
 
@@ -70,6 +71,7 @@ const Login = () => {
             id="email"
             placeholder="donato@wewelcome.com"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
+            autoComplete="email"
             required
           />
         </div>

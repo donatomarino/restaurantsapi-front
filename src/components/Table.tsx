@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import instanceAxios from '../api/APIUtils';
 import { useState } from "react";
-import { Restaurant, RestaurantCellParams } from "../types";
+import { BaseApiResponse, Restaurant, RestaurantCellParams } from "../types";
 import { EditButtons } from "./EditButtons";
 import FullPageLoader from "./PageLoader";
 import useLoad from "../hooks/useLoad";
@@ -18,10 +18,13 @@ const Table = () => {
     const fetch = async (): Promise<void> => {
       try {
         startLoading();
-        const restaurantes: Array<Restaurant> = await instanceAxios.getRequest({
+        const restaurantes: BaseApiResponse = await instanceAxios.getRequest({
           url: '/restaurants'
         })
-        setRows(restaurantes);
+
+        // Si la respuesta es exitosa, actualiza las filas
+        restaurantes.data && setRows(restaurantes.data);
+
       } catch (e: unknown) {
         console.error(e);
       } finally {

@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ApiResponse, BaseRestaurant, RestFormProps } from "../types";
+import { AuthResponse, BaseApiResponse, BaseRestaurant, RestFormProps } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
 import { ReloadContext } from "../contexto/ReloadContext";
@@ -11,37 +11,29 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
     phone: ''
   });
   const { triggerReload } = useContext(ReloadContext);
-
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      // Si se reciben datos por props, actualiza el restaurante; si no, crea uno nuevo
-      if (dataRestaurant) {
-        // Actualizar
-        const res: ApiResponse = await instanceAxios.putRequest({
-          url: `/restaurants/${dataRestaurant.id}`,
-          data: dataRestaurant
-        })
+      const isEditing = !!dataRestaurant;
+      const endpoint = isEditing ? `/restaurants/${dataRestaurant?.id}` : '/restaurants';
+      const payload = isEditing ? dataRestaurant! : newRestaurant;
 
-        if (res.success) {
-          toast.success('Restaurante actualizado correctamente');
-          closeModal();
-          triggerReload();
-        }
+      const request = isEditing ? instanceAxios.putRequest : instanceAxios.postRequest;
+
+      const res: BaseApiResponse | AuthResponse = await request({
+        url: endpoint,
+        data: payload
+      });
+
+      if(res.success) {
+        const successMessage = isEditing ? 'Restaurante actualizado correctamente' : 'Restaurante añadido correctamente';
+        toast.success(successMessage);
+        closeModal();
+        triggerReload();
       } else {
-        // Crear
-        const res: ApiResponse = await instanceAxios.postRequest({
-          url: '/restaurants',
-          data: newRestaurant
-        });
-
-        if (res.success) {
-          toast.success('Restaurante añadido correctamente');
-          closeModal();
-          triggerReload();
-        } else {
-          toast.error('El restaurante ya está registrado');
-        }
+        const errorMessage= isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado';
+        toast.error(errorMessage);
       }
     } catch (e: unknown) {
       console.error(e);

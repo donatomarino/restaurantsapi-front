@@ -1,8 +1,7 @@
-import React from 'react';
 import loadingGif from '../../assets/loading-gif.gif';
 import { FullPageLoaderProps } from '../../types';
 
-const FullPageLoader: React.FC<FullPageLoaderProps> = ({ loading }) => {
+const FullPageLoader = ({ loading }: FullPageLoaderProps) => {
   return (
     <>
       {loading ? (

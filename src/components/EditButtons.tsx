@@ -5,11 +5,11 @@ import instanceAxios from '../api/APIUtils';
 import { EditButtonsProps } from "../types";
 import { FC, useContext, useState } from "react";
 import { ReloadContext } from "../contexto/ReloadContext";
-import RestaurantModal from "./RestaurantModal";
+import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
 import { BaseRestaurant } from "../types";
 
-export const EditButtons: FC<EditButtonsProps> = ({ params }) => {
+export const EditButtons= ({ params }: EditButtonsProps) => {
   const { triggerReload } = useContext(ReloadContext);
   const { modalIsOpen, closeModal, openModal } = useModal();
   const [dataRestaurant, setDataRestaurant]= useState<BaseRestaurant>({

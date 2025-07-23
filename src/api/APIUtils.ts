@@ -1,9 +1,9 @@
 import instance from "../config/axios.config";
 import { AxiosResponse } from "axios";
-import { RequestParams } from "../types";
+import { AuthResponse, BaseApiResponse, getResponse, RequestParams } from "../types";
 
 export default {
-  getRequest: async ({ url, params = {} }: RequestParams): Promise<any> => {
+  getRequest: async ({ url, params = {} }: RequestParams): Promise<BaseApiResponse> => {
     try {
       const res: AxiosResponse = await instance.get(url, { params });
       return res.data;
@@ -16,24 +16,10 @@ export default {
     url,
     data = {},
     params = {},
-  }: RequestParams): Promise<any> => {
+  }: RequestParams): Promise<BaseApiResponse | AuthResponse> => {
     try {
       const headers = { "Content-Type": "application/json" };
       const res: AxiosResponse = await instance.post(url, data, { params, headers });
-      return res.data;
-    } catch (e: any) {
-      return e;
-    }
-  },
-
-  patchRequest: async ({
-    url,
-    data = {},
-    params = {},
-  }: RequestParams): Promise<any> => {
-    try {
-      const headers = { "Content-Type": "application/json" };
-      const res: AxiosResponse = await instance.patch(url, data, { params, headers });
       return res.data;
     } catch (e: any) {
       return e;
@@ -44,7 +30,7 @@ export default {
     url,
     data = {},
     params = {},
-  }: RequestParams): Promise<any> => {
+  }: RequestParams): Promise<BaseApiResponse> => {
     try {
       const headers = { "Content-Type": "application/json" };
       const res: AxiosResponse = await instance.put(url, data, { params, headers });
@@ -54,7 +40,7 @@ export default {
     }
   },
 
-  deleteRequest: async ({ url, params = {} }: RequestParams): Promise<any> => {
+  deleteRequest: async ({ url, params = {} }: RequestParams): Promise<BaseApiResponse> => {
     try {
       const res: AxiosResponse = await instance.delete(url, { params });
       return res.data;

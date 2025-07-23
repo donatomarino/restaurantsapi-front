@@ -8,15 +8,13 @@ export interface LoginPayload {
 
 interface BaseApiResponse {
   success: boolean;
+  message: string;
+  data?: Array<Restaurant>
 }
 
 export interface AuthResponse extends BaseApiResponse {
   access_token: string,
   token_type: string;
-}
-
-export interface ApiResponse extends BaseApiResponse {
-  message: string;
 }
 
 export interface RequestParams {
@@ -64,7 +62,6 @@ export type UseLoadReturn = {
 export type FullPageLoaderProps = {
   loading: boolean;
 };
-
 
 export type ReloadContextType = {
   reload: boolean;

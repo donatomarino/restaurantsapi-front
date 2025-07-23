@@ -1,6 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import RestaurantModal from "./RestaurantModal";
+import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
 
 const Header = () => {

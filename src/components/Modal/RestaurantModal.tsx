@@ -1,7 +1,7 @@
 import Modal from "react-modal";
-import RestForm from "./RestForm";
+import RestForm from "../RestForm";
 import { IoClose } from "react-icons/io5";
-import { ModalState } from "../types";
+import { ModalState } from "../../types";
 
 const RestaurantModal = ({ modalIsOpen, ...rest }: ModalState) => {
   return (
