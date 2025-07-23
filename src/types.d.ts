@@ -42,8 +42,8 @@ export interface EditButtonsProps {
 
 export interface RestFormProps {
   closeModal: () => void;
-  dataRestaurant?: NewRestaurant;
-  setDataRestaurant?: Dispatch<SetStateAction<NewRestaurant>>;
+  dataRestaurant?: BaseRestaurant;
+  setDataRestaurant?: Dispatch<SetStateAction<BaseRestaurant>>;
   openModal?: () => void;
 }
 

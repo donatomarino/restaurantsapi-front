@@ -3,7 +3,7 @@ import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import instanceAxios from '../api/APIUtils';
 import { EditButtonsProps } from "../types";
-import { FC, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ReloadContext } from "../contexto/ReloadContext";
 import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";

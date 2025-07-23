@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Modal from 'react-modal';
 import { ReloadProvider } from './contexto/ReloadContext';
+import Unauthorized from './pages/Unauthorized';
+import NotFound from './pages/NotFound';
 
 Modal.setAppElement('#root');
 function App() {
@@ -15,6 +17,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/home' element={<Home />} />
+            <Route path='/unauthorized' element={<Unauthorized />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </ReloadProvider>
       </Router>
