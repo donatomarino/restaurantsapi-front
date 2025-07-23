@@ -74,6 +74,6 @@ src/
 - [React Modal](https://reactcommunity.org/react-modal/)
 - [React Router DOM](https://reactrouter.com/)
 
-## Licencia
+## Autor
 
-MIT
+Donato Marino
