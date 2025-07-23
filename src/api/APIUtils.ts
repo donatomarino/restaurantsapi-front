@@ -1,6 +1,6 @@
 import instance from "../config/axios.config";
 import { AxiosResponse } from "axios";
-import { AuthResponse, BaseApiResponse, getResponse, RequestParams } from "../types";
+import { AuthResponse, BaseApiResponse, RequestParams } from "../types";
 
 export default {
   getRequest: async ({ url, params = {} }: RequestParams): Promise<BaseApiResponse> => {
