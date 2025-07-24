@@ -3,6 +3,8 @@ import { LoginPayload, BaseApiResponse, AuthResponse } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import useLoad from "../hooks/useLoad";
+import FullPageLoader from "../components/PageLoader";
 
 interface Data {
   credentials: LoginPayload,
@@ -16,6 +18,7 @@ const Login = () => {
     password: ''
   });
   const navigate = useNavigate();
+  const { loading, startLoading, stopLoading } = useLoad();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -27,7 +30,8 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const res: Data['successResponse'] | Data['errorResponse']  = await instanceAxios.postRequest({
+      startLoading();
+      const res: Data['successResponse'] | Data['errorResponse'] = await instanceAxios.postRequest({
         url: "/auth",
         data: formData
       });
@@ -42,11 +46,14 @@ const Login = () => {
 
     } catch (e: unknown) {
       console.error(e);
+    } finally {
+      stopLoading();
     }
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
+      {loading && <FullPageLoader loading={loading}/>}
       <form
         className="w-full max-w-md space-y-6 bg-gray-800 border border-gray-700 p-8 rounded-lg shadow"
         onSubmit={handleSubmit}
@@ -99,6 +106,7 @@ const Login = () => {
         <button
           type="submit"
           className="w-full text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 transition duration-200 cursor-pointer"
+          disabled={loading}
         >
           Iniciar sesión
         </button>

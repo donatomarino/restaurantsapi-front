@@ -11,7 +11,7 @@ const FullPageLoader = ({ loading }: FullPageLoaderProps) => {
             alt="Cargando..."
             className="w-[60px] h-[60px] mb-5"
           />
-          <h6 className="text-gray-800 text-base font-medium">Cargando...</h6>
+          <h6 className="text-gray-800 text-white font-medium">Cargando...</h6>
         </div>
 
       ) : null}
