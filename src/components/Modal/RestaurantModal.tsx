@@ -16,7 +16,7 @@ const RestaurantModal = ({ modalIsOpen, ...rest }: ModalState) => {
       <div className="flex justify-end">
         <button
           type="button"
-          className="py-1 rounded bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 text-white transition duration-200 cursor-pointer p-2"
+          className="py-1 rounded bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 text-white transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed p-2"
           onClick={rest.closeModal}
         >
           <IoClose size={22} />

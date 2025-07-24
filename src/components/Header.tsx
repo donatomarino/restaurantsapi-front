@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex flex-col">
           <button
             type="button"
-            className="border border-gray-800 text-gray-800 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded flex items-center px-3 py-1 hover:brightness-110 transition cursor-pointer"
+            className="border border-gray-800 text-gray-800 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded flex items-center px-3 py-1 hover:brightness-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => handleLogout()}
           >
             Cerrar sesión
@@ -29,7 +29,7 @@ const Header = () => {
 
           <button
             type="button"
-            className="bg-gray-800 hover:bg-gray-700 text-white rounded flex items-center gap-2 mt-2 px-3 py-1 hover:brightness-110 transition duration-200 cursor-pointer"
+            className="bg-gray-800 hover:bg-gray-700 text-white rounded flex items-center gap-2 mt-2 px-3 py-1 hover:brightness-110 transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={openModal}
           >
             <FaPlus />

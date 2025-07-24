@@ -20,7 +20,7 @@ const NotFound = () => {
 
         <button
           onClick={handleRedirect}
-          className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 transition duration-200 cursor-pointer"
+          className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Volver al Login
         </button>

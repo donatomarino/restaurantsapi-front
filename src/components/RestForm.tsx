@@ -3,6 +3,7 @@ import { AuthResponse, BaseApiResponse, BaseRestaurant, RestFormProps } from "..
 import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
 import { ReloadContext } from "../contexto/ReloadContext";
+import useLoad from "../hooks/useLoad";
 
 const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
   const [newRestaurant, setNewRestaurant] = useState<BaseRestaurant>({
@@ -11,10 +12,12 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
     phone: ''
   });
   const { triggerReload } = useContext(ReloadContext);
-  
+  const { loading, startLoading, stopLoading } = useLoad();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
+      startLoading();
       const isEditing = !!dataRestaurant;
       const endpoint = isEditing ? `/restaurants/${dataRestaurant?.id}` : '/restaurants';
       const payload = isEditing ? dataRestaurant! : newRestaurant;
@@ -26,18 +29,20 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
         data: payload
       });
 
-      if(res.success) {
+      if (res.success) {
         const successMessage = isEditing ? 'Restaurante actualizado correctamente' : 'Restaurante añadido correctamente';
         toast.success(successMessage);
         closeModal();
         triggerReload();
       } else {
-        const errorMessage= isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado';
+        const errorMessage = isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado';
         toast.error(errorMessage);
       }
     } catch (e: unknown) {
       console.error(e);
       toast.error('Error al añadir el restaurante');
+    } finally {
+      stopLoading();
     }
   }
 
@@ -106,7 +111,8 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
       <div className="text-end">
         <button
           type="submit"
-          className="w-full text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 transition duration-200 mt-5 cursor-pointer"
+          className="w-full text-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 transition duration-200 mt-5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={loading}
         >
           Guardar
         </button>
