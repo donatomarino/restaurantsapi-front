@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res: Data['successResponse'] | Data['errorResponse']  = await instanceAxios.postRequest({
-        url: "http://localhost/restaurantsapi-back/public/api/auth",
+        url: "/auth",
         data: formData
       });
 

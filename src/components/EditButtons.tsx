@@ -23,7 +23,7 @@ export const EditButtons= ({ params }: EditButtonsProps) => {
     try {
       // Eliminar el restaurante tramite su id
       await instanceAxios.deleteRequest({
-        url: `restaurants/${params.row.id}`,
+        url: `/restaurants/${params.row.id}`,
       });
       toast.success('Restaurante eliminado correctamente');
       triggerReload();
