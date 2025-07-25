@@ -4,14 +4,12 @@ import { toast } from 'react-toastify';
 import instanceAxios from '../api/APIUtils';
 import { EditButtonsProps } from "../types";
 import { useContext, useState } from "react";
-import { ReloadContext } from "../contexto/ReloadContext";
+import { LoadContext } from "../contexto/LoadContext";
 import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
 import { BaseRestaurant } from "../types";
-import useLoad from "../hooks/useLoad";
 
 export const EditButtons = ({ params }: EditButtonsProps) => {
-  const { triggerReload } = useContext(ReloadContext);
   const { modalIsOpen, closeModal, openModal } = useModal();
   const [dataRestaurant, setDataRestaurant] = useState<BaseRestaurant>({
     id: params.row.id,
@@ -19,22 +17,22 @@ export const EditButtons = ({ params }: EditButtonsProps) => {
     address: params.row.address,
     phone: params.row.phone
   });
-  const { loading, startLoading, stopLoading } = useLoad();
+  const {loading, toggleLoading, toggleReload} = useContext(LoadContext);
 
   const deleteRestaurant = async (): Promise<void> => {
     try {
-      startLoading();
+      toggleLoading();
       // Eliminar el restaurante tramite su id
       await instanceAxios.deleteRequest({
         url: `/restaurants/${params.row.id}`,
       });
       toast.success('Restaurante eliminado correctamente');
-      triggerReload();
+      toggleReload();
     } catch (e: unknown) {
       console.error(e);
       toast.error('Error al eliminar el restaurante');
     } finally {
-      stopLoading();
+      toggleLoading();
     }
   }
 

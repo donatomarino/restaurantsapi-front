@@ -1,7 +1,6 @@
 import instance from "../config/axios.config";
 import { AxiosResponse } from "axios";
 import { AuthResponse, BaseApiResponse, RequestParams } from "../types";
-import { ErrorResponse } from "react-router-dom";
 
 export default {
   getRequest: async ({ url, params = {} }: RequestParams): Promise<BaseApiResponse> => {
@@ -23,14 +22,7 @@ export default {
       const res: AxiosResponse = await instance.post(url, data, { params, headers });
       return res.data;
     } catch (e: any) {
-      if (e?.response?.data) {
-        return e.response.data;
-      }
-      return {
-        success: false,
-        message: "Error al procesar la solicitud",
-        error: true
-      };
+      return e.response.data;
     }
   },
 
@@ -44,7 +36,7 @@ export default {
       const res: AxiosResponse = await instance.put(url, data, { params, headers });
       return res.data;
     } catch (e: any) {
-      return e;
+      return e?.response?.data;
     }
   },
 

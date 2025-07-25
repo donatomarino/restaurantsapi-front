@@ -2,8 +2,11 @@ import Modal from "react-modal";
 import RestForm from "../RestForm";
 import { IoClose } from "react-icons/io5";
 import { ModalState } from "../../types";
+import { LoadContext } from "../../contexto/LoadContext";
+import { useContext } from "react";
 
 const RestaurantModal = ({ modalIsOpen, ...rest }: ModalState) => {
+  const {loading} = useContext(LoadContext);
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -18,6 +21,7 @@ const RestaurantModal = ({ modalIsOpen, ...rest }: ModalState) => {
           type="button"
           className="py-1 rounded bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 text-white transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed p-2"
           onClick={rest.closeModal}
+          disabled={loading}
         >
           <IoClose size={22} />
         </button>

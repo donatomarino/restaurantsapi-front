@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { AuthResponse, BaseApiResponse, BaseRestaurant, RestFormProps } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
-import { ReloadContext } from "../contexto/ReloadContext";
-import useLoad from "../hooks/useLoad";
+import { LoadContext } from "../contexto/LoadContext";
 import { useErrors } from "../hooks/useErrors";
 
 const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
@@ -12,18 +11,21 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
     address: '',
     phone: ''
   });
-  const { triggerReload } = useContext(ReloadContext);
-  const { loading, startLoading, stopLoading } = useLoad();
+  const { toggleReload, loading, toggleLoading } = useContext(LoadContext);
   const { errors, updateErrors, clearErrors } = useErrors();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      startLoading();
+      toggleLoading();
+      /*
+        Si se pasan datos de un restaurante, significa que estamos editando
+        Si no, estamos añadiendo un nuevo restaurante
+        En base a eso, definimos el endpoint y el payload
+      */
       const isEditing = !!dataRestaurant;
       const endpoint = isEditing ? `/restaurants/${dataRestaurant?.id}` : '/restaurants';
       const payload = isEditing ? dataRestaurant! : newRestaurant;
-
       const request = isEditing ? instanceAxios.putRequest : instanceAxios.postRequest;
 
       const res: BaseApiResponse | AuthResponse = await request({
@@ -31,28 +33,38 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
         data: payload
       });
 
+      /*
+        Si la respuesta es exitosa, mostramos un mensaje de éxito y cerramos el modal
+        Si es una edición, verificamos si se ha actualizado al menos un campo
+        Si no, mostramos un mensaje de error específico
+      */
       if (res.success) {
         const successMessage = isEditing ? 'Restaurante actualizado correctamente' : 'Restaurante añadido correctamente';
         clearErrors();
         closeModal();
         toast.success(successMessage);
-        triggerReload();
+        toggleReload();
+      } else if (!res.error && isEditing ) {
+        toast.error('Debes actualizar por lo menos un campo');
       } else {
         updateErrors(res);
       }
 
-
-      // Si hay un error de tipo, mostramos un mensaje específico
-      res.error === true && toast.error(isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado');
+      // Si hay un error específico, lo mostramos
+      res.error && toast.error(res.message);
     } catch (e: unknown) {
       console.error(e);
       toast.error('Error al añadir el restaurante');
     } finally {
-      stopLoading();
+      toggleLoading();
     }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    /*
+      Si estamos editando, actualizamos el estado del restaurante existente
+      Si no, actualizamos el estado del nuevo restaurante
+    */
     if (dataRestaurant) {
       setDataRestaurant({
         ...dataRestaurant,
@@ -65,6 +77,7 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
       })
     }
   }
+  
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <h5 className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 text-lg font-semibold mb-4 text-center">Añadir o modificar restaurante</h5>

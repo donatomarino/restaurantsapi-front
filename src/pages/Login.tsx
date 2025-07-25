@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LoginPayload, BaseApiResponse, AuthResponse } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import useLoad from "../hooks/useLoad";
 import FullPageLoader from "../components/PageLoader";
 import { useErrors } from "../hooks/useErrors";
+import { LoadContext } from "../contexto/LoadContext";
 
 interface Data {
   credentials: LoginPayload,
@@ -21,7 +21,7 @@ const Login = () => {
 
   const {errors, updateErrors, clearErrors} = useErrors();
   const navigate = useNavigate();
-  const { loading, startLoading, stopLoading } = useLoad();
+  const { loading, toggleLoading } = useContext(LoadContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -33,7 +33,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      startLoading();
+      toggleLoading();
       const res: Data['successResponse'] | Data['errorResponse'] = await instanceAxios.postRequest({
         url: "/auth",
         data: formData
@@ -51,7 +51,7 @@ const Login = () => {
     } catch (e: unknown) {
       console.error(e);
     } finally {
-      stopLoading();
+      toggleLoading();
     }
   }
 

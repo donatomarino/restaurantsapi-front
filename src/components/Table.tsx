@@ -6,34 +6,33 @@ import { useState } from "react";
 import { BaseApiResponse, Restaurant, RestaurantCellParams } from "../types";
 import { EditButtons } from "./EditButtons";
 import FullPageLoader from "./PageLoader";
-import useLoad from "../hooks/useLoad";
-import { ReloadContext } from "../contexto/ReloadContext";
+import { LoadContext } from "../contexto/LoadContext";
 
 const Table = () => {
-  const { reload } = useContext(ReloadContext);
-  const [rows, setRows] = useState<Array<Restaurant>>([]);
-  const { loading, startLoading, stopLoading } = useLoad();
-
+  const { reload} = useContext(LoadContext);
+  const [loadingPage, setLoadingPage] = useState<boolean>(false);
+  
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       try {
-        startLoading();
+        setLoadingPage(true)
         const restaurantes: BaseApiResponse = await instanceAxios.getRequest({
           url: '/restaurants'
         })
-
+        
         // Si la respuesta es exitosa, actualiza las filas
         restaurantes.data && setRows(restaurantes.data);
-
+        
       } catch (e: unknown) {
         console.error(e);
       } finally {
-        stopLoading();
+        setLoadingPage(false)
       }
     }
     fetch();
   }, [reload]);
-
+  
+  const [rows, setRows] = useState<Array<Restaurant>>([]);
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1 },
     { field: 'name', headerName: 'Nombre', flex: 1 },
@@ -52,40 +51,42 @@ const Table = () => {
 
   return (
     <div className="container mx-auto">
-      {loading && <FullPageLoader loading={loading} />}
-
       <Paper sx={{ height: '80vh', width: '100%' }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: { paginationModel },
-            columns: {
-              columnVisibilityModel: {
-                id: false,
-                updated_at: false
+        {loadingPage ? (
+          <FullPageLoader loading={loadingPage} />
+        ) : (
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: { paginationModel },
+              columns: {
+                columnVisibilityModel: {
+                  id: false,
+                  updated_at: false
+                },
               },
-            },
-            sorting: {
-              sortModel: [{ field: 'updated_at', sort: 'desc' }],
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          sx={{
-            border: 0,
-            '& .MuiDataGrid-columnHeader': {
-              backgroundColor: '#1f2937',
-              color: '#fff',
-              fontWeight: 'bold',
-            },
-            '& .MuiDataGrid-sortIcon': {
-              color: '#fff',
-            },
-            '& .MuiDataGrid-columnHeader button svg': {
-              color: '#fff',
-            },
-          }}
-        />
+              sorting: {
+                sortModel: [{ field: 'updated_at', sort: 'desc' }],
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+            sx={{
+              border: 0,
+              '& .MuiDataGrid-columnHeader': {
+                backgroundColor: '#1f2937',
+                color: '#fff',
+                fontWeight: 'bold',
+              },
+              '& .MuiDataGrid-sortIcon': {
+                color: '#fff',
+              },
+              '& .MuiDataGrid-columnHeader button svg': {
+                color: '#fff',
+              },
+            }}
+          />
+        )}
       </Paper>
     </div>
   );

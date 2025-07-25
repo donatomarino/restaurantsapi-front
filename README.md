@@ -19,7 +19,7 @@ src/
   assets/           # Imágenes y recursos estáticos
   components/       # Componentes reutilizables (Header, Table, Modal, etc.)
   config/           # Configuración de Axios y constantes
-  contexto/         # Contextos de React (ReloadContext)
+  contexto/         # Contextos de React (LoadContext)
   hooks/            # Custom hooks (useLoad, useModal)
   pages/            # Páginas principales (Login, Home)
   types.d.ts        # Tipos TypeScript globales

@@ -30,22 +30,10 @@ instance.interceptors.request.use(
 
 // Interceptor de respuesta
 instance.interceptors.response.use(
-  (res: AxiosResponse): AxiosResponse => {
-    return res;
+  (response: AxiosResponse): AxiosResponse => {
+    return response;
   },
   (error: AxiosError): Promise<never> => {
-    if (error.response?.status === 401) {
-      return Promise.reject(new Error("Unauthorized"));
-    }
-    if (error.response?.status === 404) {
-      return Promise.reject(new Error("Not found"));
-    }
-    if (error.response?.status === 409) {
-      return Promise.reject(new Error("Conflict"));
-    }
-    if (error.response?.status === 500) {
-      return Promise.reject(new Error("Internal Server Error"));
-    }
     return Promise.reject(error);
   }
 );

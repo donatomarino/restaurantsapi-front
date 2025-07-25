@@ -2,10 +2,13 @@ import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
+import { LoadContext } from "../contexto/LoadContext";
+import { useContext } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
-  const {openModal, modalIsOpen, closeModal} = useModal();
+  const { openModal, modalIsOpen, closeModal } = useModal();
+  const { loading } = useContext(LoadContext);
 
   const handleLogout = (): void => {
     localStorage.removeItem('token');
@@ -23,6 +26,7 @@ const Header = () => {
             type="button"
             className="border border-gray-800 text-gray-800 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded flex items-center px-3 py-1 hover:brightness-110 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => handleLogout()}
+            disabled={loading}
           >
             Cerrar sesión
           </button>
@@ -31,14 +35,15 @@ const Header = () => {
             type="button"
             className="bg-gray-800 hover:bg-gray-700 text-white rounded flex items-center gap-2 mt-2 px-3 py-1 hover:brightness-110 transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={openModal}
+            disabled={loading}
           >
             <FaPlus />
             Añadir
           </button>
 
-          <RestaurantModal 
-            modalIsOpen = {modalIsOpen}
-            closeModal = {closeModal}
+          <RestaurantModal
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
           />
         </div>
       </div>

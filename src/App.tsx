@@ -4,7 +4,7 @@ import { ToastContainer, Bounce } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Modal from 'react-modal';
-import { ReloadProvider } from './contexto/ReloadContext';
+import { LoadProvider } from './contexto/LoadContext';
 import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound';
 
@@ -13,14 +13,14 @@ function App() {
   return (
     <>
       <Router>
-        <ReloadProvider>
+        <LoadProvider>
           <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/home' element={<Home />} />
             <Route path='/unauthorized' element={<Unauthorized />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-        </ReloadProvider>
+        </LoadProvider>
       </Router>
       <ToastContainer
         position="bottom-right"

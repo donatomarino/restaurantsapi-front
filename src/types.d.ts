@@ -56,21 +56,17 @@ export interface ModalState extends RestFormProps {
 
 export type RestaurantCellParams = GridRenderCellParams<Restaurant>;
 
-export type UseLoadReturn = {
-  loading: boolean;
-  startLoading: () => void;
-  stopLoading: () => void;
-}
-
 export type FullPageLoaderProps = {
   loading: boolean;
 };
 
-export type ReloadContextType = {
+export type LoadContextType = {
   reload: boolean;
-  triggerReload: () => void;
+  loading: boolean;
+  toggleReload: () => void;
+  toggleLoading: () => void;
 }
 
-export type ReloadProviderProps = {
+export type LoadProviderProps = {
   children: ReactNode;
 }
