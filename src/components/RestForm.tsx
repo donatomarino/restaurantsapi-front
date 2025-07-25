@@ -4,6 +4,7 @@ import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
 import { ReloadContext } from "../contexto/ReloadContext";
 import useLoad from "../hooks/useLoad";
+import { useErrors } from "../hooks/useErrors";
 
 const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
   const [newRestaurant, setNewRestaurant] = useState<BaseRestaurant>({
@@ -13,6 +14,7 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
   });
   const { triggerReload } = useContext(ReloadContext);
   const { loading, startLoading, stopLoading } = useLoad();
+  const { errors, updateErrors, clearErrors } = useErrors();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -31,13 +33,17 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
 
       if (res.success) {
         const successMessage = isEditing ? 'Restaurante actualizado correctamente' : 'Restaurante añadido correctamente';
-        toast.success(successMessage);
+        clearErrors();
         closeModal();
+        toast.success(successMessage);
         triggerReload();
       } else {
-        const errorMessage = isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado';
-        toast.error(errorMessage);
+        updateErrors(res);
       }
+
+
+      // Si hay un error de tipo, mostramos un mensaje específico
+      res.error === true && toast.error(isEditing ? 'El restaurante no se pudo actualizar' : 'El restaurante ya está registrado');
     } catch (e: unknown) {
       console.error(e);
       toast.error('Error al añadir el restaurante');
@@ -74,8 +80,10 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
           className="border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
           value={dataRestaurant?.name}
           onChange={handleChange}
-          required
         />
+        {errors?.message.name && (
+          <div className="text-red-700 mt-2 mx-1">{errors.message.name}</div>
+        )}
       </div>
 
       <div className="mb-4">
@@ -89,8 +97,10 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
           className="border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
           value={dataRestaurant?.address}
           onChange={handleChange}
-          required
         />
+        {errors?.message.address && (
+          <div className="text-red-700 mt-2 mx-1">{errors.message.address}</div>
+        )}
       </div>
 
       <div className="mb-4">
@@ -104,8 +114,10 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
           className="border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
           value={dataRestaurant?.phone}
           onChange={handleChange}
-          required
         />
+        {errors?.message.phone && (
+          <div className="text-red-700 mt-2 mx-1">{errors.message.phone}</div>
+        )}
       </div>
 
       <div className="text-end">

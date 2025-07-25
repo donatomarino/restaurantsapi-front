@@ -12,6 +12,7 @@ export interface BaseApiResponse {
   success: boolean;
   message: MessageObject;
   data?: Array<Restaurant>
+  error?: boolean;
 }
 
 export interface AuthResponse extends BaseApiResponse {

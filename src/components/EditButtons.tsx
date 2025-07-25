@@ -3,7 +3,7 @@ import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import instanceAxios from '../api/APIUtils';
 import { EditButtonsProps } from "../types";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ReloadContext } from "../contexto/ReloadContext";
 import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
@@ -20,10 +20,6 @@ export const EditButtons = ({ params }: EditButtonsProps) => {
     phone: params.row.phone
   });
   const { loading, startLoading, stopLoading } = useLoad();
-
-  useEffect(() => {
-    console.log(loading)
-  }, [loading])
 
   const deleteRestaurant = async (): Promise<void> => {
     try {

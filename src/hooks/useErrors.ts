@@ -3,10 +3,7 @@ import { BaseApiResponse } from '../types';
 
 const initialErrorState: BaseApiResponse = {
   success: false,
-  message: {
-    email: [],
-    password: []
-  }
+  message: {}
 };
 
 export function useErrors() {
