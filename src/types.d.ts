@@ -6,9 +6,11 @@ export interface LoginPayload {
   password: string;
 }
 
-interface BaseApiResponse {
+type MessageResponse = string | { [field: string]: string[] };
+
+export interface BaseApiResponse {
   success: boolean;
-  message: string;
+  message: MessageObject;
   data?: Array<Restaurant>
 }
 

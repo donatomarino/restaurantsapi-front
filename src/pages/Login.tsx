@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import useLoad from "../hooks/useLoad";
 import FullPageLoader from "../components/PageLoader";
+import { useErrors } from "../hooks/useErrors";
 
 interface Data {
   credentials: LoginPayload,
-  successResponse?: AuthResponse,
-  errorResponse?: BaseApiResponse;
+  successResponse: AuthResponse,
+  errorResponse: BaseApiResponse;
 }
 
 const Login = () => {
@@ -17,6 +18,8 @@ const Login = () => {
     email: '',
     password: ''
   });
+
+  const {errors, updateErrors, clearErrors} = useErrors();
   const navigate = useNavigate();
   const { loading, startLoading, stopLoading } = useLoad();
 
@@ -38,9 +41,10 @@ const Login = () => {
 
       if (res.success && 'access_token' in res) {
         localStorage.setItem('token', res.access_token);
+        clearErrors();
         navigate('/home');
       } else {
-        console.log(res);
+        updateErrors(res);
         toast.error('Insertar las credenciales indicadas en el placeholder');
       }
 
@@ -53,7 +57,7 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
-      {loading && <FullPageLoader loading={loading}/>}
+      {loading && <FullPageLoader loading={loading} />}
       <form
         className="w-full max-w-md space-y-6 bg-gray-800 border border-gray-700 p-8 rounded-lg shadow"
         onSubmit={handleSubmit}
@@ -79,8 +83,10 @@ const Login = () => {
             placeholder="donato@wewelcome.com"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
             autoComplete="email"
-            required
           />
+          {errors?.message.email && (
+            <div className="text-red-700 mt-2 mx-1">{errors.message.email}</div>
+          )}
         </div>
 
         <div>
@@ -99,8 +105,11 @@ const Login = () => {
             placeholder="wewelcome2025"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
             autoComplete="current-password"
-            required
           />
+
+          {errors?.message.password && (
+            <div className="text-red-700 mt-2 mx-1">{errors.message.password}</div>
+          )}
         </div>
 
         <button
