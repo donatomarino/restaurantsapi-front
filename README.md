@@ -71,7 +71,7 @@ src/
 
 3. **Configura las variables de entorno**
    ```env
-   VITE_API_URL=http://localhost:8000/public/api
+   VITE_API_URL=http://localhost:800/public/api (CON BACK EN DOCKER)
    ```
 
 4. **Inicia el servidor de desarrollo**
@@ -80,7 +80,7 @@ src/
    ```
 
 5. **Accede a la aplicación**
-   Abre [http://localhost:5173] en tu navegador
+   Abre [http://localhost:5173](http://localhost:5173) en tu navegador
 
 ## 📋 Scripts Disponibles
 
