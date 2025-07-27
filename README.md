@@ -1,79 +1,141 @@
-# restaurantesapi-front
+# 🍽️ Restaurant API - Frontend
 
-Aplicación web para la gestión de restaurantes, desarrollada con **React**, **TypeScript** y **Vite**. Permite autenticación, listado, creación, edición y eliminación de restaurantes mediante una API REST.
+Aplicación web para la gestión de restaurantes, desarrollada con **React**, **TypeScript** y **Vite**. Permite autenticación JWT, listado, creación, edición y eliminación de restaurantes mediante una API REST.
 
-## Características
+## ✨ Características
 
-- Autenticación de usuario.
-- Listado de restaurantes con paginación y edición.
-- Añadir, modificar y eliminar restaurantes.
-- Interfaz moderna con **TailwindCSS** y componentes de **MUI**.
-- Notificaciones con **react-toastify**.
-- Gestión de estado global con **React Context**.
+- 🔐 **Autenticación JWT** con login seguro
+- 📋 **Gestión completa de restaurantes** (CRUD)
+- 📊 **Tabla interactiva** con Material-UI DataGrid
+- 🎭 **Modal para añadir/editar** restaurantes
+- ⚠️ **Manejo de errores** con validación de formularios
+- ⏳ **Loading states** y feedback visual
+- 📱 **Diseño responsive** con TailwindCSS
+- 🔔 **Notificaciones** con react-toastify
 
-## Estructura del proyecto
+## 🛠️ Tecnologías
+
+- **React 18** con TypeScript
+- **Vite** como bundler
+- **TailwindCSS** para estilos
+- **Material-UI** para componentes de tabla
+- **React Modal** para ventanas modales
+- **Axios** para peticiones HTTP
+- **React Router DOM** para navegación
+- **React Toastify** para notificaciones
+- **React Icons** para iconografía
+
+## 📁 Estructura del Proyecto
 
 ```
 src/
-  api/              # Utilidades para llamadas HTTP (APIUtils.ts)
-  assets/           # Imágenes y recursos estáticos
-  components/       # Componentes reutilizables (Header, Table, Modal, etc.)
-  config/           # Configuración de Axios y constantes
-  contexto/         # Contextos de React (LoadContext)
-  hooks/            # Custom hooks (useLoad, useModal)
-  pages/            # Páginas principales (Login, Home)
-  types.d.ts        # Tipos TypeScript globales
-  App.tsx           # Componente principal
-  main.tsx          # Punto de entrada
+├── api/
+│   └── APIUtils.ts          # Configuración de Axios y métodos HTTP
+├── assets/
+│   └── loading.gif          # Recursos estáticos
+├── components/
+│   ├── EditButtons.tsx      # Botones de editar/eliminar en tabla
+│   ├── Header.tsx           # Cabecera de la aplicación
+│   ├── PageLoader/          # Componente de carga
+│   ├── RestForm.tsx         # Formulario de restaurantes
+│   ├── Table.tsx            # Tabla de restaurantes (DataGrid)
+│   └── Modal/
+│       └── RestaurantModal.tsx  # Modal para formularios
+├── contexto/
+│   ├── LoadContext.tsx      # Contexto para estados de carga
+│   └── ReloadContext.tsx    # Contexto para recargar datos
+├── hooks/
+│   ├── useErrors.ts         # Hook para manejo de errores
+│   ├── useLoad.ts           # Hook para estados de carga
+│   └── useModal.ts          # Hook para control de modales
+├── pages/
+│   ├── Home.tsx             # Página principal con tabla
+│   └── Login.tsx            # Página de login
+├── types.d.ts               # Definiciones de TypeScript
+├── App.tsx                  # Componente principal
+└── main.tsx                 # Punto de entrada
 ```
 
-## Instalación
+## 🚀 Instalación
 
-1. Clona el repositorio:
-   ```sh
+1. **Clona el repositorio**
+   ```bash
    git clone https://github.com/tu-usuario/restaurantesapi-front.git
    cd restaurantesapi-front
    ```
 
-2. Instala las dependencias:
-   ```sh
+2. **Instala dependencias**
+   ```bash
    npm install
    ```
 
-3. Configura las variables de entorno en `.env`:
+3. **Configura las variables de entorno**
+   ```env
+   VITE_API_URL=http://localhost:8000/public/api
    ```
-   VITE_API_URL=http://localhost/restaurantsapi-back/public/api
-   ```
 
-## Scripts
-
-- `npm run dev` — Inicia el servidor de desarrollo.
-- `npm run build` — Compila la aplicación para producción.
-- `npm run preview` — Previsualiza la build de producción.
-- `npm run lint` — Ejecuta ESLint.
-
-## Uso
-
-1. Inicia el backend de la API en la URL configurada.
-2. Ejecuta la app:
-   ```sh
+4. **Inicia el servidor de desarrollo**
+   ```bash
    npm run dev
    ```
-3. Accede a [http://localhost:5173](http://localhost:5173) (o el puerto indicado por Vite).
-4. Inicia sesión con las credenciales proporcionadas en el placeholder.
 
-## Dependencias principales
+5. **Accede a la aplicación**
+   Abre [http://localhost:5173] en tu navegador
 
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [MUI](https://mui.com/)
-- [Axios](https://axios-http.com/)
-- [React Toastify](https://fkhadra.github.io/react-toastify/)
-- [React Modal](https://reactcommunity.org/react-modal/)
-- [React Router DOM](https://reactrouter.com/)
+## 📋 Scripts Disponibles
 
-## Autor
+- `npm run dev` — Inicia el servidor de desarrollo
+- `npm run build` — Compila la aplicación para producción
+- `npm run preview` — Previsualiza la build de producción
+- `npm run lint` — Ejecuta ESLint
 
-Donato Marino
+## 🔑 Autenticación
+
+### Credenciales de prueba
+```
+Email: donato@wewelcome.com
+Password: wewelcome2025
+```
+
+### Flujo de autenticación
+- **Login**: `POST /auth` con email y password
+- **Token**: Se incluye automáticamente en las headers
+- **Logout**: Elimina el token del localStorage
+
+## 📱 Funcionalidades
+
+### 🏠 Página Principal
+- Tabla interactiva con todos los restaurantes
+- Paginación y ordenación
+- Botones de acción (editar/eliminar)
+- Botón para añadir nuevo restaurante
+
+### ➕ Crear Restaurante
+- Modal con formulario de creación
+- Validación de campos obligatorios
+- Feedback de éxito/error
+
+### ✏️ Editar Restaurante
+- Modal prellenado con datos existentes
+- Validación de cambios
+- Actualización en tiempo real
+
+### 🗑️ Eliminar Restaurante
+- Eliminación directa desde la tabla
+- Actualización automática
+
+## 📦 Dependencias Principales
+
+- [React](https://react.dev/) - Framework principal
+- [TypeScript](https://www.typescriptlang.org/) - Tipado estático
+- [Vite](https://vitejs.dev/) - Build tool
+- [TailwindCSS](https://tailwindcss.com/) - Estilos utilitarios
+- [Material-UI](https://mui.com/) - Componentes de tabla
+- [Axios](https://axios-http.com/) - Cliente HTTP
+- [React Router DOM](https://reactrouter.com/) - Navegación
+- [React Toastify](https://fkhadra.github.io/react-toastify/) - Notificaciones
+- [React Modal](https://reactcommunity.org/react-modal/) - Ventanas modales
+
+## 👤 Autor
+
+**Donato Marino**
