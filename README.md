@@ -25,6 +25,10 @@ Aplicación web para la gestión de restaurantes, desarrollada con **React**, **
 - **React Toastify** para notificaciones
 - **React Icons** para iconografía
 
+## 📊 Diagrama de Secuencia - Proceso de Autenticación
+
+![Diagrama de Login](./docs/diagrama_secuencia_login.png)
+
 ## 📁 Estructura del Proyecto
 
 ```
@@ -60,7 +64,7 @@ src/
 
 1. **Clona el repositorio**
    ```bash
-   git clone https://github.com/tu-usuario/restaurantesapi-front.git
+   git clone https://github.com/donatomarino/restaurantsapi-front
    cd restaurantesapi-front
    ```
 
@@ -106,6 +110,8 @@ Password: wewelcome2025
 
 ### 🏠 Página Principal
 - Tabla interactiva con todos los restaurantes
+- Búsqueda por campos (nombre, dirección, teléfono)
+- Filtros por columnas con Material-UI DataGrid
 - Paginación y ordenación
 - Botones de acción (editar/eliminar)
 - Botón para añadir nuevo restaurante
@@ -124,6 +130,12 @@ Password: wewelcome2025
 - Eliminación directa desde la tabla
 - Actualización automática
 
+### 🔍 Búsqueda y Filtros
+- **Búsqueda global** en tiempo real
+- **Filtros por columna** individual
+- **Ordenación** por cualquier campo
+- **Paginación** configurable (5, 10 elementos)
+
 ## 📦 Dependencias Principales
 
 - [React](https://react.dev/) - Framework principal
@@ -136,6 +148,6 @@ Password: wewelcome2025
 - [React Toastify](https://fkhadra.github.io/react-toastify/) - Notificaciones
 - [React Modal](https://reactcommunity.org/react-modal/) - Ventanas modales
 
-## 👤 Autor
+## 👨‍💻 Autor
 
 **Donato Marino**
