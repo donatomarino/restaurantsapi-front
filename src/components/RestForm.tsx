@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { LoadContext } from "../contexto/LoadContext";
 import { useErrors } from "../hooks/useErrors";
 
-const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
+const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
   const [newRestaurant, setNewRestaurant] = useState<BaseRestaurant>({
     name: '',
     address: '',
@@ -146,4 +146,4 @@ const AddRestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestForm
   );
 };
 
-export default AddRestForm;
+export default RestForm;
