@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { AuthResponse, BaseApiResponse, BaseRestaurant, ModalProps } from "../types";
+import { AuthResponse, BaseApiResponse, BaseRestaurant, ModalRestProps } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
 import { LoadContext } from "../contexto/LoadContext";
 import { useErrors } from "../hooks/useErrors";
 
-const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalProps) => {
+const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalRestProps) => {
   const [newRestaurant, setNewRestaurant] = useState<BaseRestaurant>({
     name: '',
     address: '',

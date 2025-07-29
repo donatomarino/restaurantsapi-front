@@ -29,6 +29,7 @@ const RestaurantModal = ({ modalIsOpen, ...rest }: ModalRestProps) => {
       </div>
 
       <RestForm
+        modalIsOpen={modalIsOpen}
         {...rest}
       />
     </Modal>

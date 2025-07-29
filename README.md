@@ -8,6 +8,7 @@ Aplicación web para la gestión de restaurantes, desarrollada con **React**, **
 - 📋 **Gestión completa de restaurantes** (CRUD)
 - 📊 **Tabla interactiva** con Material-UI DataGrid
 - 🎭 **Modal para añadir/editar** restaurantes
+- ❌ **Modal de confirmación** para eliminación segura
 - ⚠️ **Manejo de errores** con validación de formularios
 - ⏳ **Loading states** y feedback visual
 - 📱 **Diseño responsive** con TailwindCSS
@@ -39,6 +40,7 @@ src/
 │   └── loading.gif          # Recursos estáticos
 ├── components/
 │   ├── EditButtons.tsx      # Botones de editar/eliminar en tabla
+│   ├── Footer.tsx           # Footer de la aplicación
 │   ├── Header.tsx           # Cabecera de la aplicación
 │   ├── LoginForm.tsx        # Formulario de login
 │   ├── PageLoader/
@@ -52,11 +54,12 @@ src/
 │   └── ReloadContext.tsx    # Contexto para recargar datos
 ├── hooks/
 │   ├── useErrors.ts         # Hook para manejo de errores
-│   ├── useLoad.ts           # Hook para estados de carga
 │   └── useModal.ts          # Hook para control de modales
 ├── pages/
 │   ├── Home.tsx             # Página principal con tabla
-│   └── Login.tsx            # Página de login
+│   ├── Login.tsx            # Página de login
+│   ├── Unauthorized.tsx     # Página de acceso no autorizado
+│   └── NotFound.tsx         # Página 404
 ├── types.d.ts               # Definiciones de TypeScript
 ├── App.tsx                  # Componente principal con rutas
 ├── main.tsx                 # Punto de entrada
@@ -108,6 +111,7 @@ Password: wewelcome2025
 ### Flujo de autenticación
 - **Login**: `POST /auth` con email y password
 - **Token**: Se incluye automáticamente en las headers
+- **Headers**: Se incluye Bearer token en todas las peticiones autenticadas
 - **Logout**: Elimina el token del localStorage
 
 ## 📱 Funcionalidades
@@ -129,16 +133,18 @@ Password: wewelcome2025
 - Modal prellenado con datos existentes
 - Validación de cambios
 - Actualización en tiempo real
+- Notificaciones toast** de confirmación
 
 ### 🗑️ Eliminar Restaurante
 - Eliminación directa desde la tabla
+- Eliminación segura con confirmación explícita
 - Actualización automática
 
 ### 🔍 Búsqueda y Filtros
-- **Búsqueda global** en tiempo real
-- **Filtros por columna** individual
-- **Ordenación** por cualquier campo
-- **Paginación** configurable (5, 10 elementos)
+- Búsqueda global en tiempo real
+- Filtros por columna individual
+- Ordenación por cualquier campo
+- Paginación configurable (5, 10 elementos)
 
 ## 📦 Dependencias Principales
 
