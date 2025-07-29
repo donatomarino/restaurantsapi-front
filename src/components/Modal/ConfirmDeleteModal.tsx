@@ -11,8 +11,8 @@ const ConfirmDeleteModal = ({ deleteModalIsOpen, closeDeleteModal, onConfirm }: 
   return (
     <Modal
       isOpen={deleteModalIsOpen}
-      shouldCloseOnOverlayClick={true}
-      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick={false}
+      shouldCloseOnEsc={false}
       onRequestClose={closeDeleteModal}
       contentLabel="Confirmar eliminación"
       className="bg-gray-800 border border-gray-700 p-8 rounded-lg shadow w-full max-w-lg mx-auto focus:outline-none"

@@ -95,7 +95,7 @@ const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalRestPr
           onChange={handleChange}
         />
         {errors?.message.name && (
-          <div className="text-red-700 mt-2 mx-1">{errors.message.name}</div>
+          <div className="text-red-500 mt-2 mx-1">{errors.message.name}</div>
         )}
       </div>
 
@@ -112,7 +112,7 @@ const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalRestPr
           onChange={handleChange}
         />
         {errors?.message.address && (
-          <div className="text-red-700 mt-2 mx-1">{errors.message.address}</div>
+          <div className="text-red-500 mt-2 mx-1">{errors.message.address}</div>
         )}
       </div>
 
@@ -129,7 +129,7 @@ const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalRestPr
           onChange={handleChange}
         />
         {errors?.message.phone && (
-          <div className="text-red-700 mt-2 mx-1">{errors.message.phone}</div>
+          <div className="text-red-500 mt-2 mx-1">{errors.message.phone}</div>
         )}
       </div>
 
