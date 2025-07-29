@@ -8,9 +8,10 @@ import { LoadContext } from "../contexto/LoadContext";
 import RestaurantModal from "./Modal/RestaurantModal";
 import useModal from "../hooks/useModal";
 import { BaseRestaurant } from "../types";
+import ConfirmDeleteModal from "./Modal/ConfirmDeleteModal";
 
 export const EditButtons = ({ params }: EditButtonsProps) => {
-  const { modalIsOpen, closeModal, openModal } = useModal();
+  const { modalIsOpen, closeModal, openModal, openDeleteModal, closeDeleteModal, deleteModalIsOpen } = useModal();
   const [dataRestaurant, setDataRestaurant] = useState<BaseRestaurant>({
     id: params.row.id,
     name: params.row.name,
@@ -51,7 +52,7 @@ export const EditButtons = ({ params }: EditButtonsProps) => {
         <button
           type="button"
           className="flex items-center gap-2 px-3 py-1 rounded bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:brightness-110 text-white transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={() => deleteRestaurant()}
+          onClick={openDeleteModal}
           disabled={loading}
         >
           <IoClose size={22} />
@@ -63,6 +64,12 @@ export const EditButtons = ({ params }: EditButtonsProps) => {
         closeModal={closeModal}
         dataRestaurant={dataRestaurant}
         setDataRestaurant={setDataRestaurant}
+      />
+
+      <ConfirmDeleteModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        closeDeleteModal={closeDeleteModal}
+        onConfirm={deleteRestaurant}
       />
     </div>
   )

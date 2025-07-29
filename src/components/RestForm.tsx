@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { AuthResponse, BaseApiResponse, BaseRestaurant, RestFormProps } from "../types";
+import { AuthResponse, BaseApiResponse, BaseRestaurant, ModalProps } from "../types";
 import instanceAxios from '../api/APIUtils';
 import { toast } from "react-toastify";
 import { LoadContext } from "../contexto/LoadContext";
 import { useErrors } from "../hooks/useErrors";
 
-const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormProps) => {
+const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalProps) => {
   const [newRestaurant, setNewRestaurant] = useState<BaseRestaurant>({
     name: '',
     address: '',
@@ -83,7 +83,7 @@ const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: RestFormPro
       <h5 className="text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 text-lg font-semibold mb-4 text-center">Añadir o modificar restaurante</h5>
 
       <div className="mb-4">
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 text-left">
+        <label htmlFor="name" className="block mb-2 text-sm font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 text-left">
           Nombre
         </label>
         <input

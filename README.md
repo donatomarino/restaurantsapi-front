@@ -40,7 +40,9 @@ src/
 ├── components/
 │   ├── EditButtons.tsx      # Botones de editar/eliminar en tabla
 │   ├── Header.tsx           # Cabecera de la aplicación
-│   ├── PageLoader/          # Componente de carga
+│   ├── LoginForm.tsx        # Formulario de login
+│   ├── PageLoader/
+│   │   └── index.tsx        # Componente de carga con spinner
 │   ├── RestForm.tsx         # Formulario de restaurantes
 │   ├── Table.tsx            # Tabla de restaurantes (DataGrid)
 │   └── Modal/
@@ -56,8 +58,10 @@ src/
 │   ├── Home.tsx             # Página principal con tabla
 │   └── Login.tsx            # Página de login
 ├── types.d.ts               # Definiciones de TypeScript
-├── App.tsx                  # Componente principal
-└── main.tsx                 # Punto de entrada
+├── App.tsx                  # Componente principal con rutas
+├── main.tsx                 # Punto de entrada
+├── index.css                # Estilos globales y TailwindCSS
+└── vite-env.d.ts           # Tipos de Vite
 ```
 
 ## 🚀 Instalación

@@ -43,15 +43,26 @@ export interface EditButtonsProps {
   params: RestaurantCellParams;
 }
 
-export interface RestFormProps {
+export interface ModalState {
+  modalIsOpen: boolean;
+  openModal?: () => void;
+  closeModal: () => void;
+  openDeleteModal: () => void;
+  closeDeleteModal: () => void;
+  deleteModalIsOpen: boolean;
+}
+
+export interface ModalRestProps {
+  modalIsOpen: boolean;
   closeModal: () => void;
   dataRestaurant?: BaseRestaurant;
   setDataRestaurant?: Dispatch<SetStateAction<BaseRestaurant>>;
-  openModal?: () => void;
 }
 
-export interface ModalState extends RestFormProps {
-  modalIsOpen: boolean;
+export interface ModalDeleteState {
+  deleteModalIsOpen: boolean;
+  closeDeleteModal: () => void;
+  onConfirm: () => void;
 }
 
 export type RestaurantCellParams = GridRenderCellParams<Restaurant>;

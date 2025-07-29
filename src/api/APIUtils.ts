@@ -22,7 +22,21 @@ export default {
       const res: AxiosResponse = await instance.post(url, data, { params, headers });
       return res.data;
     } catch (e: any) {
-      return e.response.data;
+      return e.response.data || e;
+    }
+  },
+
+  patchRequest: async ({
+    url,
+    data = {},
+    params = {},
+  }: RequestParams): Promise<AuthResponse | BaseApiResponse> => {
+    try {
+      const headers = { "Content-Type": "application/json" };
+      const res: AxiosResponse = await instance.patch(url, data, { params, headers });
+      return res.data;
+    } catch (e: any) {
+      return e.response.data || e;
     }
   },
 
@@ -36,7 +50,7 @@ export default {
       const res: AxiosResponse = await instance.put(url, data, { params, headers });
       return res.data;
     } catch (e: any) {
-      return e?.response?.data;
+      return e?.response?.data || e;
     }
   },
 

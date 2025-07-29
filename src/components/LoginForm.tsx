@@ -86,7 +86,7 @@ const LoginForm = () => {
             disabled={loading}
           />
           {errors?.message.email && (
-            <div className="text-red-700 mt-2 mx-1">{errors.message.email}</div>
+            <div className="text-red-400 mt-2 mx-1">{errors.message.email}</div>
           )}
         </div>
 
@@ -110,7 +110,7 @@ const LoginForm = () => {
           />
 
           {errors?.message.password && (
-            <div className="text-red-700 mt-2 mx-1">{errors.message.password}</div>
+            <div className="text-red-400 mt-2 mx-1">{errors.message.password}</div>
           )}
         </div>
 
