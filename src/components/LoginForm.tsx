@@ -19,7 +19,7 @@ const LoginForm = () => {
     password: ''
   });
 
-  const {errors, updateErrors, clearErrors} = useErrors();
+  const { errors, updateErrors, clearErrors } = useErrors();
   const navigate = useNavigate();
   const { loading, toggleLoading } = useContext(LoadContext);
 
@@ -39,13 +39,17 @@ const LoginForm = () => {
         data: formData
       });
 
+      console.log(res);
+
       if (res.success && 'access_token' in res) {
         localStorage.setItem('token', res.access_token);
         clearErrors();
         navigate('/home');
-      } else {
+      } else if (res.error) {
+        toast.error(res.message);
         updateErrors(res);
-        toast.error('Insertar las credenciales indicadas en el placeholder');
+      } else {
+        toast.error('Demasiados intentos fallidos, por favor intente más tarde');
       }
 
     } catch (e: unknown) {
