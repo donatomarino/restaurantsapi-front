@@ -51,7 +51,7 @@ const Table = () => {
 
   return (
     <div className="container mx-auto">
-      <Paper sx={{ height: '80vh', width: '100%' }}>
+      <Paper sx={{ height: '75vh', width: '100%' }}>
         {loadingPage ? (
           <FullPageLoader loading={loadingPage} />
         ) : (
