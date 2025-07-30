@@ -13,7 +13,6 @@ const RestaurantModal = ({ modalIsOpen, ...rest }: ModalRestProps) => {
       shouldCloseOnOverlayClick={false}
       shouldCloseOnEsc={false}
       className="bg-gray-800 border border-gray-700 p-8 rounded-lg shadow w-full max-w-lg mx-auto focus:outline-none"
-
       overlayClassName="fixed inset-0 bg-transparent flex items-center justify-center z-50 -60"
       contentLabel='New Restaurant'
     >

@@ -25,7 +25,7 @@ const RestForm = ({ closeModal, dataRestaurant, setDataRestaurant }: ModalRestPr
       */
       const isEditing = !!dataRestaurant;
       const endpoint = isEditing ? `/restaurants/${dataRestaurant?.id}` : '/restaurants';
-      const payload = isEditing ? dataRestaurant! : newRestaurant;
+      const payload = isEditing ? dataRestaurant : newRestaurant;
       const request = isEditing ? instanceAxios.putRequest : instanceAxios.postRequest;
 
       const res: BaseApiResponse | AuthResponse = await request({

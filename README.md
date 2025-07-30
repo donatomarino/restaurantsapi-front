@@ -3,7 +3,7 @@
 Aplicación web para la gestión de restaurantes, desarrollada con **React**, **TypeScript** y **Vite**. Permite autenticación JWT, listado, creación, edición y eliminación de restaurantes mediante una API REST.
 
 ## 🚀 Despliegue en Vercel.com
-- **URL:** https://restaurantsapi-back-1.onrender.com](https://restaurantsapi-front.vercel.app/
+- **URL:** https://restaurantsapi-front.vercel.app/
 
 ## ✨ Características
 
@@ -160,6 +160,10 @@ Password: wewelcome2025
 - [React Router DOM](https://reactrouter.com/) - Navegación
 - [React Toastify](https://fkhadra.github.io/react-toastify/) - Notificaciones
 - [React Modal](https://reactcommunity.org/react-modal/) - Ventanas modales
+
+## 🔮 Próximas Mejoras
+
+- [ ] **Actualización parcial (PATCH)**: Implementar endpoint PATCH para modificar campos específicos del restaurante sin necesidad de enviar todos los datos
 
 ## 👨‍💻 Autor
 

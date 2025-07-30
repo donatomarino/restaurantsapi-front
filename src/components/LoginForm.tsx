@@ -39,8 +39,6 @@ const LoginForm = () => {
         data: formData
       });
 
-      console.log(res);
-
       if (res.success && 'access_token' in res) {
         localStorage.setItem('token', res.access_token);
         clearErrors();
@@ -51,7 +49,6 @@ const LoginForm = () => {
       } else {
         toast.error('Demasiados intentos fallidos, por favor intente más tarde');
       }
-
     } catch (e: unknown) {
       console.error(e);
     } finally {
