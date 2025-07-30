@@ -53,8 +53,7 @@ src/
 │   └── Modal/
 │       └── RestaurantModal.tsx  # Modal para formularios
 ├── contexto/
-│   ├── LoadContext.tsx      # Contexto para estados de carga
-│   └── ReloadContext.tsx    # Contexto para recargar datos
+│   ├── LoadContext.tsx      # Contexto para estados de carga y recargar datos
 ├── hooks/
 │   ├── useErrors.ts         # Hook para manejo de errores
 │   └── useModal.ts          # Hook para control de modales
@@ -163,7 +162,7 @@ Password: wewelcome2025
 
 ## 🔮 Próximas Mejoras
 
-- [ ] **Actualización parcial (PATCH)**: Implementar endpoint PATCH para modificar campos específicos del restaurante sin necesidad de enviar todos los datos
+- **Actualización parcial (PATCH)**: Implementar endpoint PATCH para modificar campos específicos del restaurante sin necesidad de enviar todos los datos
 
 ## 👨‍💻 Autor
 
