@@ -23,7 +23,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { loading, toggleLoading } = useContext(LoadContext);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value

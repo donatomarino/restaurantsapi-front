@@ -18,7 +18,7 @@ const Header = () => {
     <div className="container mx-auto px-4 py-4 shadow-sm mt-3">
       <div className="flex justify-between items-center">
         <h1 className="font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 text-3xl mb-5">
-          Restaurant Api - Donato Marino
+          Restaurantes Api - Donato Marino
         </h1>
 
         <div className="flex flex-col">
