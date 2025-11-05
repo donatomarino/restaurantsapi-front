@@ -34,7 +34,95 @@ Aplicación web para la gestión de restaurantes, desarrollada con **React**, **
 ![Diagrama de Login](./docs/diagrama_secuencia_login.png)
 
 ## 📁 Estructura del Proyecto
+```
 
+src/
+├── main.tsx                               # Punto de entrada
+├── App.tsx                                # Componente principal
+├── index.css                              # Estilos globales
+├── vite-env.d.ts                          # Types de Vite
+│
+├── api/
+│   └── APIUtils.ts                        # Utilidades para API
+│
+├── assets/
+│   └── react.svg                          # Logo de React
+│
+├── config/
+│   ├── axios.config.ts                    # Configuración Axios
+│   └── constants/
+│       └── constants.ts                   # Constantes del proyecto
+│
+├── context/
+│   ├── ComponentContext.tsx               # Context de componentes
+│   ├── SearchContext.tsx                  # Context de búsqueda
+│   └── SongContext.tsx                    # Context de canciones
+│
+├── modules/
+│   ├── home/
+│   │   ├── components/
+│   │   │   ├── Content.tsx                # Contenido principal
+│   │   │   ├── Explore.tsx                # Explorar canciones
+│   │   │   ├── Footer.tsx                 # Pie de página
+│   │   │   ├── Footer.css                 # Estilos footer
+│   │   │   ├── Header.tsx                 # Cabecera
+│   │   │   ├── Library.tsx                # Biblioteca favoritos
+│   │   │   ├── Search.tsx                 # Búsqueda
+│   │   │   ├── SideMenu.tsx               # Menú lateral
+│   │   │   └── SideMenuMobile.tsx         # Menú móvil
+│   │   ├── hooks/
+│   │   │   ├── useContent.ts              # Hook contenido
+│   │   │   ├── useExplore.ts              # Hook explorar
+│   │   │   ├── useHeader.ts               # Hook cabecera
+│   │   │   ├── useLibrary.ts              # Hook biblioteca
+│   │   │   └── usePlaySong.ts             # Hook reproductor
+│   │   ├── pages/
+│   │   │   └── Home.tsx                   # Página principal
+│   │   └── services/
+│   │       ├── homeServices.ts            # Servicios home
+│   │       └── musicServices.ts           # Servicios música
+│   ├── login/
+│   │   ├── components/
+│   │   │   ├── FormField.tsx              # Campo formulario
+│   │   │   └── Header.tsx                 # Cabecera login
+│   │   ├── hooks/
+│   │   │   └── useLogin.ts                # Hook login
+│   │   ├── pages/
+│   │   │   └── Login.tsx                  # Página login
+│   │   └── services/
+│   │       └── authService.ts             # Servicio autenticación
+│   └── register/
+│       ├── hooks/
+│       │   └── useRegister.ts             # Hook registro
+│       ├── pages/
+│       │   └── Register.tsx               # Página registro
+│       └── services/
+│           └── regService.ts              # Servicio registro
+│
+└── types/
+    └── types.d.ts                         # Definiciones de tipos
+```
+```
+dmusic-back/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php          # Login/Registro
+│   │   │   ├── SongController.php          # Gestión canciones
+│   │   │   └── ArtistController.php        # Gestión artistas
+│   │   └── Middleware/
+│   └── Models/
+│       ├── User.php                        # Modelo usuario
+│       ├── Song.php                        # Modelo canción
+│       └── Artist.php                      # Modelo artista
+├── routes/
+│   └── api.php                            # Rutas de la API
+├── database/
+│   └── migrations/                        # Estructura BD
+└── config/
+    ├── database.php                       # Configuración MySQL
+    └── sanctum.php                        # Configuración auth
+```
 ```
 src/
 ├── api/
