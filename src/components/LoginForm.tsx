@@ -81,7 +81,7 @@ const LoginForm = () => {
             type="email"
             name="email"
             id="email"
-            placeholder="donato@wewelcome.com"
+            placeholder="donato@test.com"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
             autoComplete="email"
             disabled={loading}
@@ -104,7 +104,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="wewelcome2025"
+            placeholder="test1234"
             className="placeholder-gray-400 border text-gray-900 rounded-lg focus:border-yellow-500 block w-full p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-yellow-500"
             autoComplete="current-password"
             disabled={loading}
