@@ -34,128 +34,54 @@ Aplicación web para la gestión de restaurantes, desarrollada con **React**, **
 ![Diagrama de Login](./docs/diagrama_secuencia_login.png)
 
 ## 📁 Estructura del Proyecto
+
+```text
+src/
+├── api/
+│   └── APIUtils.ts                  # Configuración de Axios y llamadas a la API
+├── assets/
+│   └── loading.gif                  # Recursos visuales estáticos
+├── components/
+│   ├── EditButtons.tsx              # Botones para editar y eliminar registros
+│   ├── Footer.tsx                   # Pie de la aplicación
+│   ├── Header.tsx                   # Cabecera global
+│   ├── LoginForm.tsx                # Formulario de autenticación
+│   ├── Modal/
+│   │   └── RestaurantModal.tsx     # Modal de creación/edición de restaurantes
+│   ├── PageLoader/
+│   │   └── index.tsx                # Indicador de carga
+│   ├── RestForm.tsx                 # Formulario de restaurante
+│   └── Table.tsx                    # Tabla principal con DataGrid
+├── config/
+│   ├── axios.config.ts              # Configuración de Axios
+│   └── constants/
+│       └── constants.ts             # Constantes del proyecto
+├── contexto/
+│   └── LoadContext.tsx              # Contexto para estado de carga y recarga de datos
+├── hooks/
+│   ├── useErrors.ts                 # Manejo de errores y validaciones
+│   └── useModal.ts                  # Control de modales reutilizables
+├── pages/
+│   ├── Home.tsx                     # Página principal con listado de restaurantes
+│   ├── Login.tsx                    # Página de inicio de sesión
+│   ├── Unauthorized.tsx             # Vista para acceso no autorizado
+│   └── NotFound.tsx                 # Página 404
+├── App.tsx                          # Componente principal con rutas
+├── index.css                        # Estilos globales y TailwindCSS
+├── main.tsx                         # Punto de entrada de la app
+├── types.d.ts                       # Definiciones globales de TypeScript
+├── vite-env.d.ts                    # Tipos de Vite
+└── App.css                          # Estilos del componente principal
 ```
 
-src/
-├── main.tsx                               # Punto de entrada
-├── App.tsx                                # Componente principal
-├── index.css                              # Estilos globales
-├── vite-env.d.ts                          # Types de Vite
-│
-├── api/
-│   └── APIUtils.ts                        # Utilidades para API
-│
-├── assets/
-│   └── react.svg                          # Logo de React
-│
-├── config/
-│   ├── axios.config.ts                    # Configuración Axios
-│   └── constants/
-│       └── constants.ts                   # Constantes del proyecto
-│
-├── context/
-│   ├── ComponentContext.tsx               # Context de componentes
-│   ├── SearchContext.tsx                  # Context de búsqueda
-│   └── SongContext.tsx                    # Context de canciones
-│
-├── modules/
-│   ├── home/
-│   │   ├── components/
-│   │   │   ├── Content.tsx                # Contenido principal
-│   │   │   ├── Explore.tsx                # Explorar canciones
-│   │   │   ├── Footer.tsx                 # Pie de página
-│   │   │   ├── Footer.css                 # Estilos footer
-│   │   │   ├── Header.tsx                 # Cabecera
-│   │   │   ├── Library.tsx                # Biblioteca favoritos
-│   │   │   ├── Search.tsx                 # Búsqueda
-│   │   │   ├── SideMenu.tsx               # Menú lateral
-│   │   │   └── SideMenuMobile.tsx         # Menú móvil
-│   │   ├── hooks/
-│   │   │   ├── useContent.ts              # Hook contenido
-│   │   │   ├── useExplore.ts              # Hook explorar
-│   │   │   ├── useHeader.ts               # Hook cabecera
-│   │   │   ├── useLibrary.ts              # Hook biblioteca
-│   │   │   └── usePlaySong.ts             # Hook reproductor
-│   │   ├── pages/
-│   │   │   └── Home.tsx                   # Página principal
-│   │   └── services/
-│   │       ├── homeServices.ts            # Servicios home
-│   │       └── musicServices.ts           # Servicios música
-│   ├── login/
-│   │   ├── components/
-│   │   │   ├── FormField.tsx              # Campo formulario
-│   │   │   └── Header.tsx                 # Cabecera login
-│   │   ├── hooks/
-│   │   │   └── useLogin.ts                # Hook login
-│   │   ├── pages/
-│   │   │   └── Login.tsx                  # Página login
-│   │   └── services/
-│   │       └── authService.ts             # Servicio autenticación
-│   └── register/
-│       ├── hooks/
-│       │   └── useRegister.ts             # Hook registro
-│       ├── pages/
-│       │   └── Register.tsx               # Página registro
-│       └── services/
-│           └── regService.ts              # Servicio registro
-│
-└── types/
-    └── types.d.ts                         # Definiciones de tipos
-```
-```
-dmusic-back/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── AuthController.php          # Login/Registro
-│   │   │   ├── SongController.php          # Gestión canciones
-│   │   │   └── ArtistController.php        # Gestión artistas
-│   │   └── Middleware/
-│   └── Models/
-│       ├── User.php                        # Modelo usuario
-│       ├── Song.php                        # Modelo canción
-│       └── Artist.php                      # Modelo artista
-├── routes/
-│   └── api.php                            # Rutas de la API
-├── database/
-│   └── migrations/                        # Estructura BD
-└── config/
-    ├── database.php                       # Configuración MySQL
-    └── sanctum.php                        # Configuración auth
-```
-```
-src/
-├── api/
-│   └── APIUtils.ts          # Configuración de Axios y métodos HTTP
-├── assets/
-│   └── loading.gif          # Recursos estáticos
-├── components/
-│   ├── EditButtons.tsx      # Botones de editar/eliminar en tabla
-│   ├── Footer.tsx           # Footer de la aplicación
-│   ├── Header.tsx           # Cabecera de la aplicación
-│   ├── LoginForm.tsx        # Formulario de login
-│   ├── PageLoader/
-│   │   └── index.tsx        # Componente de carga con spinner
-│   ├── RestForm.tsx         # Formulario de restaurantes
-│   ├── Table.tsx            # Tabla de restaurantes (DataGrid)
-│   └── Modal/
-│       └── RestaurantModal.tsx  # Modal para formularios
-├── contexto/
-│   ├── LoadContext.tsx      # Contexto para estados de carga y recargar datos
-├── hooks/
-│   ├── useErrors.ts         # Hook para manejo de errores
-│   └── useModal.ts          # Hook para control de modales
-├── pages/
-│   ├── Home.tsx             # Página principal con tabla
-│   ├── Login.tsx            # Página de login
-│   ├── Unauthorized.tsx     # Página de acceso no autorizado
-│   └── NotFound.tsx         # Página 404
-├── types.d.ts               # Definiciones de TypeScript
-├── App.tsx                  # Componente principal con rutas
-├── main.tsx                 # Punto de entrada
-├── index.css                # Estilos globales y TailwindCSS
-└── vite-env.d.ts           # Tipos de Vite
-```
+Esta estructura refleja la versión actual del frontend y mantiene una separación clara entre:
+- servicios y configuración de API
+- componentes reutilizables
+- hooks personalizados
+- contextos globales
+- páginas de la aplicación
+- estilos y tipos compartidos
+
 
 ## 🚀 Instalación
 
@@ -172,7 +98,7 @@ src/
 
 3. **Configura las variables de entorno**
    ```env
-   VITE_API_URL=http://localhost:800/api (CON BACK EN DOCKER)
+   VITE_API_URL=http://127.0.0.1:8000/api
    ```
 
 4. **Inicia el servidor de desarrollo**
@@ -194,8 +120,8 @@ src/
 
 ### Credenciales de prueba
 ```
-Email: donato@wewelcome.com
-Password: wewelcome2025
+Email: donato@test.com
+Password: test1234
 ```
 
 ### Flujo de autenticación
